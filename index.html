@@ -5,304 +5,348 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Affiche Défense de Projet - Kasereka Kawa Néhémie</title>
     <style>
-        /* ================ */
-        /* VARIABLES CSS */
-        /* ================ */
+        /* Variables CSS Premium */
         :root {
-            /* Palette de couleurs professionnelle */
-            --bleu-fonce: #0a2342;
-            --bleu-moyen: #2c4a7f;
-            --bleu-clair: #4b88c5;
-            --or: #d9b70d;
-            --argent: #c0c0c0;
-            --blanc: #ffffff;
-            --noir: #1a1a1a;
-            --gris-clair: #f5f5f5;
-            
-            /* Effets d'ombre */
-            --ombre-portee: 0 10px 30px rgba(10, 35, 66, 0.3);
-            --ombre-texte: 1px 1px 3px rgba(0, 0, 0, 0.3);
-            
-            /* Dégradés */
-            --degrade-bleu: linear-gradient(135deg, var(--bleu-fonce) 0%, var(--bleu-moyen) 100%);
-            --degrade-or: linear-gradient(135deg, var(--or) 0%, #f5d742 100%);
-            
-            /* Bordures */
-            --bordure-argent: 2px solid var(--argent);
+            --primary: #0d3b66;
+            --secondary: #f4a261;
+            --accent: #e76f51;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --text: #343a40;
+            --shadow-color: rgba(13, 59, 102, 0.3);
+            --overlay: rgba(13, 59, 102, 0.7);
+            --gold-light: #f5d742;
         }
 
-        /* ================ */
-        /* POLICES */
-        /* ================ */
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Raleway:wght@300;400;600;700&display=swap');
-        
-        /* ================ */
-        /* BASE */
-        /* ================ */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=Playfair+Display:wght@700;900&family=Water+Brush&display=swap');
+
+        /* Reset et base premium */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #e0e0e0;
-            font-family: 'Raleway', sans-serif;
-            padding: 20px;
+            background-color: #f0f0f0;
+            font-family: 'Montserrat', sans-serif;
+            overflow: auto;
         }
-        
-        /* ================ */
-        /* AFFICHE A4 */
-        /* ================ */
-        .affiche {
+
+        /* Conteneur A4 avec ratio */
+        .affiche-container {
             width: 210mm;
             height: 297mm;
-            background-color: var(--blanc);
             position: relative;
             overflow: hidden;
-            box-shadow: var(--ombre-portee);
-            display: grid;
-            grid-template-rows: auto 1fr auto;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);
+            background-color: white;
         }
-        
-        /* ================ */
-        /* EN-TÊTE */
-        /* ================ */
-        .header {
-            background: var(--degrade-bleu);
-            color: var(--blanc);
-            padding: 30px 40px;
-            position: relative;
-            overflow: hidden;
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
-        }
-        
-        .header::after {
-            content: "";
+
+        /* Arrière-plan avec image traitée */
+        .background {
             position: absolute;
-            bottom: -50px;
-            left: 0;
-            width: 100%;
-            height: 50px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M1200 0L0 0 892.25 114.72 1200 0z" fill="%230a2342"></path></svg>');
-            background-size: cover;
-        }
-        
-        .titre-principal {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 10px;
-            text-shadow: var(--ombre-texte);
-            position: relative;
-            z-index: 2;
-        }
-        
-        .sous-titre {
-            font-size: 1.2rem;
-            font-weight: 300;
-            max-width: 70%;
-            position: relative;
-            z-index: 2;
-        }
-        
-        /* ================ */
-        /* CONTENU PRINCIPAL */
-        /* ================ */
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            padding: 40px;
-            position: relative;
-        }
-        
-        /* Colonne de gauche - Photo */
-        .photo-col {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        
-        .photo-container {
-            width: 300px;
-            height: 300px;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: var(--ombre-portee);
-            border: var(--bordure-argent);
-            position: relative;
-            transform: perspective(1000px) rotateY(-5deg);
-            transition: transform 0.5s ease;
-        }
-        
-        .photo-container:hover {
-            transform: perspective(1000px) rotateY(0deg);
-        }
-        
-        .photo-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(10, 35, 66, 0.2) 0%, transparent 100%);
+            background: 
+                linear-gradient(135deg, var(--overlay) 0%, transparent 100%),
+                url('2.jfif') center/cover no-repeat;
+            filter: grayscale(30%) contrast(110%) brightness(90%);
             z-index: 1;
         }
-        
-        /* Colonne de droite - Projet */
-        .projet-col {
+
+        /* Overlay pour améliorer la lisibilité */
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 59, 102, 0.8) 0%, transparent 100%);
+            z-index: 2;
+        }
+
+        /* Contenu principal */
+        .content {
+            position: relative;
+            z-index: 3;
+            height: 100%;
+            padding: 40px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            color: var(--light);
+        }
+
+        /* ==================== */
+        /* NOUVEAUX ELEMENTS DE DESIGN */
+        /* ==================== */
+        
+        /* Effet floral aux coins */
+        .floral-corner {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            z-index: 4;
+            opacity: 0.15;
         }
         
-        .titre-projet {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            color: var(--bleu-fonce);
-            margin-bottom: 20px;
+        .floral-top-left {
+            top: 0;
+            left: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, var(--gold-light) 0%, transparent 40%),
+                repeating-linear-gradient(45deg, transparent, transparent 5px, var(--accent) 5px, var(--accent) 10px);
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+        }
+        
+        .floral-bottom-right {
+            bottom: 0;
+            right: 0;
+            background: 
+                radial-gradient(circle at 70% 70%, var(--gold-light) 0%, transparent 40%),
+                repeating-linear-gradient(-45deg, transparent, transparent 5px, var(--accent) 5px, var(--accent) 10px);
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);
+        }
+
+        /* Effet d'écriture "eau qui coule" */
+        .water-text {
+            font-family: 'Water Brush', cursive;
+            background: linear-gradient(to right, var(--gold-light), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline;
             position: relative;
         }
         
-        .titre-projet::after {
+        .water-text::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, var(--gold-light), var(--accent));
+            animation: wave 3s infinite ease-in-out;
+        }
+        
+        @keyframes wave {
+            0%, 100% { transform: scaleX(1); }
+            50% { transform: scaleX(1.1); }
+        }
+
+        /* ==================== */
+        /* STYLES EXISTANTS AMELIORES */
+        /* ==================== */
+        
+        /* En-tête */
+        .header {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px var(--shadow-color);
+            color: white;
+            position: relative;
+        }
+        
+        .title .water-text {
+            font-size: 80px;
+            line-height: 0.9;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            font-weight: 300;
+            max-width: 70%;
+            line-height: 1.4;
+            position: relative;
+        }
+        
+        .subtitle::before {
             content: "";
             position: absolute;
             bottom: -10px;
             left: 0;
             width: 100px;
-            height: 3px;
-            background: var(--degrade-or);
+            height: 2px;
+            background: linear-gradient(to right, var(--gold-light), var(--accent));
         }
-        
-        .description-projet {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: var(--noir);
-            margin-bottom: 25px;
-        }
-        
-        .features {
-            margin-bottom: 25px;
-        }
-        
-        .features h3 {
-            font-size: 1.1rem;
-            color: var(--bleu-moyen);
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .features ul {
-            list-style-type: none;
-        }
-        
-        .features li {
-            padding: 8px 0;
+
+        /* Section projet */
+        .project {
+            margin-top: auto;
+            margin-bottom: 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            color: var(--text);
+            max-width: 80%;
             position: relative;
-            padding-left: 25px;
-            font-size: 0.95rem;
+            overflow: hidden;
         }
         
-        .features li::before {
-            content: "▹";
-            position: absolute;
-            left: 0;
-            color: var(--or);
-            font-weight: bold;
-        }
-        
-        /* ================ */
-        /* PIED DE PAGE */
-        /* ================ */
-        .footer {
-            background-color: var(--bleu-fonce);
-            color: var(--blanc);
-            padding: 20px 40px;
-            text-align: right;
-            position: relative;
-        }
-        
-        .footer::before {
+        .project::before {
             content: "";
             position: absolute;
-            top: -15px;
+            top: 0;
             left: 0;
             width: 100%;
-            height: 15px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M1200 0L0 0 892.25 114.72 1200 0z" fill="%230a2342"></path></svg>');
-            background-size: cover;
+            height: 5px;
+            background: linear-gradient(to right, var(--gold-light), var(--accent));
+        }
+
+        .project-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary);
         }
         
-        .auteur {
-            font-size: 1.2rem;
+        .project-title .water-text {
+            font-size: 40px;
+        }
+
+        .project-description {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .feature::before {
+            content: "❀";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            animation: float 2s infinite ease-in-out;
+        }
+
+        /* Signature */
+        .signature {
+            margin-top: auto;
+            text-align: right;
+            color: white;
+            position: relative;
+        }
+        
+        .signature::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            right: 0;
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(to left, var(--gold-light), transparent);
+        }
+
+        .name {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
             margin-bottom: 5px;
         }
         
-        .nom-auteur {
-            font-weight: 700;
-            color: var(--or);
+        .name .water-text {
+            font-size: 30px;
         }
-        
+
         .date {
+            font-size: 18px;
             font-style: italic;
-            font-size: 1rem;
         }
-        
-        /* ================ */
-        /* ÉLÉMENTS DÉCORATIFS */
-        /* ================ */
-        .decor-cristal {
+
+        /* Éléments décoratifs */
+        .decor {
             position: absolute;
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, rgba(75, 136, 197, 0.1) 0%, transparent 70%);
+            background-color: var(--accent);
+            opacity: 0.2;
+        }
+
+        .decor-1 {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            background: radial-gradient(circle, var(--gold-light) 0%, transparent 70%);
+        }
+
+        .decor-2 {
+            width: 150px;
+            height: 150px;
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            z-index: 0;
-        }
-        
-        .decor-cristal-1 {
-            top: -50px;
-            right: -50px;
-            animation: float 8s infinite ease-in-out;
-        }
-        
-        .decor-cristal-2 {
             bottom: 50px;
             left: -50px;
-            animation: float 12s infinite ease-in-out reverse;
+            background: conic-gradient(from 45deg, var(--gold-light), var(--accent), var(--gold-light));
         }
-        
-        /* QR Code */
+
+        /* QR Code amélioré */
         .qr-code {
             position: absolute;
-            bottom: 30px;
+            bottom: 40px;
             left: 40px;
             width: 80px;
             height: 80px;
-            background-color: var(--blanc);
+            background-color: white;
             padding: 5px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             grid-template-rows: repeat(7, 1fr);
             gap: 2px;
+            border: 1px solid var(--gold-light);
         }
         
+        .qr-code::after {
+            content: "Scan me";
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
         .qr-pixel {
-            background-color: var(--bleu-fonce);
-            border-radius: 2px;
+            background-color: var(--primary);
+            border-radius: 1px;
+            transition: all 0.3s ease;
         }
         
-        /* Positionnement des pixels QR */
+        .qr-pixel:hover {
+            background-color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* Placement des pixels du QR code */
         .qr-pixel:nth-child(1), .qr-pixel:nth-child(2), .qr-pixel:nth-child(3),
         .qr-pixel:nth-child(4), .qr-pixel:nth-child(5), .qr-pixel:nth-child(6),
         .qr-pixel:nth-child(7), .qr-pixel:nth-child(14), .qr-pixel:nth-child(21),
@@ -317,123 +361,129 @@
         .qr-pixel:nth-child(40), .qr-pixel:nth-child(41), .qr-pixel:nth-child(32),
         .qr-pixel:nth-child(33), .qr-pixel:nth-child(34), .qr-pixel:nth-child(25),
         .qr-pixel:nth-child(26), .qr-pixel:nth-child(27) {
-            background-color: var(--bleu-fonce);
+            background-color: var(--primary);
         }
-        
-        /* ================ */
-        /* ANIMATIONS */
-        /* ================ */
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-            100% { transform: translateY(0) rotate(0deg); }
-        }
-        
-        /* ================ */
-        /* RESPONSIVE */
-        /* ================ */
-        @media screen and (max-width: 800px) {
-            .affiche {
+
+        /* Responsive pour mobile */
+        @media screen and (max-width: 600px) {
+            body {
+                padding: 20px;
+                align-items: flex-start;
+            }
+            
+            .affiche-container {
                 width: 100%;
                 height: auto;
                 aspect-ratio: 1 / 1.414; /* Ratio A4 */
             }
             
-            .main-content {
-                grid-template-columns: 1fr;
+            .title {
+                font-size: 48px;
             }
             
-            .photo-col {
-                margin-bottom: 30px;
+            .title .water-text {
+                font-size: 52px;
             }
             
-            .titre-principal {
-                font-size: 2.5rem;
-            }
-            
-            .sous-titre {
+            .subtitle {
+                font-size: 18px;
                 max-width: 100%;
             }
+            
+            .project {
+                max-width: 100%;
+                padding: 20px;
+            }
+            
+            .project-title {
+                font-size: 28px;
+            }
+            
+            .project-title .water-text {
+                font-size: 30px;
+            }
+            
+            .floral-corner {
+                width: 100px;
+                height: 100px;
+            }
         }
-        
-        /* ================ */
-        /* IMPRESSION */
-        /* ================ */
+
+        /* Styles d'impression */
         @media print {
             body {
                 background: none;
-                padding: 0;
             }
             
-            .affiche {
+            .affiche-container {
                 box-shadow: none;
                 width: 210mm;
                 height: 297mm;
             }
+            
+            .qr-code {
+                border: 1px solid var(--primary) !important;
+            }
+        }
+        
+        /* Animation des éléments floraux */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.15; }
+            50% { opacity: 0.25; }
+        }
+        
+        .floral-corner {
+            animation: pulse 8s infinite ease-in-out;
         }
     </style>
 </head>
 <body>
-    <div class="affiche">
-        <!-- Éléments décoratifs -->
-        <div class="decor-cristal decor-cristal-1"></div>
-        <div class="decor-cristal decor-cristal-2"></div>
+    <div class="affiche-container">
+        <!-- Arrière-plan avec image -->
+        <div class="background"></div>
+        <div class="overlay"></div>
         
-        <!-- En-tête -->
-        <header class="header">
-            <h1 class="titre-principal">Défense de Projet</h1>
-            <p class="sous-titre">Présentation du projet de fin d'études - Excellence technologique</p>
-        </header>
+        <!-- Nouveaux éléments floraux -->
+        <div class="floral-corner floral-top-left"></div>
+        <div class="floral-corner floral-bottom-right"></div>
+        
+        <!-- Éléments décoratifs existants -->
+        <div class="decor decor-1"></div>
+        <div class="decor decor-2"></div>
         
         <!-- Contenu principal -->
-        <main class="main-content">
-            <!-- Colonne de gauche - Photo -->
-            <div class="photo-col">
-                <div class="photo-container">
-                    <!-- Remplacez cette image par votre photo -->
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
-                         alt="Portrait de Kasereka Kawa Néhémie"
-                         style="width:100%; height:100%; object-fit:cover;">
-                    <div class="photo-overlay"></div>
-                </div>
+        <div class="content">
+            <div class="header">
+                <h1 class="title"><span class="water-text">Défense</span><br><span class="water-text">de Projet</span></h1>
+                <p class="subtitle">Présentation du projet de fin d'études - Excellence technologique</p>
             </div>
             
-            <!-- Colonne de droite - Projet -->
-            <div class="projet-col">
-                <h2 class="titre-projet">Plateforme Web de Gestion Locative</h2>
-                <p class="description-projet">
-                    Solution complète révolutionnant la gestion des locations immobilières.
-                    Architecture modulaire et interface intuitive offrant une expérience
+            <div class="project">
+                <h2 class="project-title"><span class="water-text">Plateforme Web de Gestion Locative</span></h2>
+                <p class="project-description">
+                    Solution complète révolutionnant la gestion des locations immobilières. 
+                    Architecture modulaire et interface intuitive offrant une expérience 
                     fluide pour propriétaires et locataires.
                 </p>
                 
                 <div class="features">
-                    <h3>Fonctionnalités principales :</h3>
-                    <ul>
-                        <li>Gestion centralisée des propriétés</li>
-                        <li>Système de réservation en ligne</li>
-                        <li>Paiements sécurisés</li>
-                        <li>Contrats numériques</li>
-                        <li>Calendrier de disponibilité</li>
-                        <li>Tableau de bord analytique</li>
-                        <li>Système de notation et d'avis</li>
-                    </ul>
-                </div>
-                
-                <div class="technologies">
-                    <h3>Technologies utilisées :</h3>
-                    <p>React.js, Node.js, MongoDB, API RESTful, AWS, Docker</p>
+                    <div class="feature">Gestion centralisée des propriétés</div>
+                    <div class="feature">Système de réservation en ligne</div>
+                    <div class="feature">Paiements sécurisés</div>
+                    <div class="feature">Contrats numériques</div>
+                    <div class="feature">Calendrier de disponibilité</div>
+                    <div class="feature">Tableau de bord analytique</div>
                 </div>
             </div>
-        </main>
-        
-        <!-- Pied de page -->
-        <footer class="footer">
-            <div class="auteur">
-                <span class="nom-auteur">Kasereka Kawa Néhémie</span>
-            </div>
-            <div class="date">
-                Présenté le 14 août 2023
+            
+            <div class="signature">
+                <div class="name"><span class="water-text">Kasereka Kawa Néhémie</span></div>
+                <div class="date">14 août 2023</div>
             </div>
             
             <!-- QR Code -->
@@ -488,11 +538,8 @@
                 <div class="qr-pixel"></div>
                 <div class="qr-pixel"></div>
                 <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
             </div>
-        </footer>
+        </div>
     </div>
 </body>
 </html>
