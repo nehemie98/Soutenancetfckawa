@@ -16,6 +16,8 @@
             --shadow-color: rgba(13, 59, 102, 0.3);
             --overlay: rgba(13, 59, 102, 0.7);
             --gold-light: #f5d742;
+            --water-blue: #4fc3f7;
+            --water-dark: #0288d1;
         }
 
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=Playfair+Display:wght@700;900&family=Water+Brush&display=swap');
@@ -54,7 +56,8 @@
             height: 100%;
             background: 
                 linear-gradient(135deg, var(--overlay) 0%, transparent 100%),
-                url('2.jfif') center/cover no-repeat;
+                url('2.jfif') no-repeat center center / cover;
+            filter: grayscale(50%) contrast(120%) brightness(80%);
             filter: grayscale(30%) contrast(110%) brightness(90%);
             z-index: 1;
         }
@@ -80,63 +83,114 @@
         }
 
         /* ==================== */
-        /* NOUVEAUX ELEMENTS DE DESIGN */
+        /* FLEURS CSS PURES */
         /* ==================== */
         
-        /* Effet floral aux coins */
-        .floral-corner {
+        .flower {
             position: absolute;
+            z-index: 4;
+            opacity: 0.7;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.2));
+        }
+        
+        /* Fleur coin supérieur gauche */
+        .flower-tl {
+            top: 20px;
+            left: 20px;
+            width: 120px;
+            height: 120px;
+        }
+        
+        /* Fleur coin inférieur droit */
+        .flower-br {
+            bottom: 20px;
+            right: 20px;
             width: 150px;
             height: 150px;
-            z-index: 4;
-            opacity: 0.15;
+            transform: rotate(180deg);
         }
         
-        .floral-top-left {
-            top: 0;
-            left: 0;
-            background: 
-                radial-gradient(circle at 30% 30%, var(--gold-light) 0%, transparent 40%),
-                repeating-linear-gradient(45deg, transparent, transparent 5px, var(--accent) 5px, var(--accent) 10px);
-            clip-path: polygon(0 0, 100% 0, 0 100%);
+        /* Pétales de fleur */
+        .petal {
+            position: absolute;
+            background: linear-gradient(135deg, var(--gold-light), var(--accent));
+            border-radius: 50% 0 50% 50%;
+            transform-origin: center right;
         }
         
-        .floral-bottom-right {
-            bottom: 0;
-            right: 0;
-            background: 
-                radial-gradient(circle at 70% 70%, var(--gold-light) 0%, transparent 40%),
-                repeating-linear-gradient(-45deg, transparent, transparent 5px, var(--accent) 5px, var(--accent) 10px);
-            clip-path: polygon(100% 0, 100% 100%, 0 100%);
+        /* Centre de la fleur */
+        .flower-center {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
         }
-
-        /* Effet d'écriture "eau qui coule" */
+        
+        /* Animation des fleurs */
+        @keyframes bloom {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        .flower {
+            animation: bloom 2s ease-out forwards;
+        }
+        
+        /* ==================== */
+        /* EFFET TEXTE AVEC GOUTTES */
+        /* ==================== */
+        
         .water-text {
             font-family: 'Water Brush', cursive;
-            background: linear-gradient(to right, var(--gold-light), var(--accent));
+            background: linear-gradient(to right, var(--water-blue), var(--water-dark));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            display: inline;
+            display: inline-block;
             position: relative;
+            padding: 0 5px;
         }
         
         .water-text::after {
             content: "";
             position: absolute;
-            bottom: -5px;
+            bottom: -10px;
             left: 0;
             width: 100%;
-            height: 2px;
-            background: linear-gradient(to right, var(--gold-light), var(--accent));
+            height: 3px;
+            background: linear-gradient(to right, var(--water-blue), var(--water-dark));
+            border-radius: 50% 50% 0 0;
             animation: wave 3s infinite ease-in-out;
         }
         
-        @keyframes wave {
-            0%, 100% { transform: scaleX(1); }
-            50% { transform: scaleX(1.1); }
+        /* Gouttes qui tombent */
+        .water-drop {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--water-blue);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            animation: drop 4s infinite ease-in;
+            opacity: 0.7;
         }
-
+        
+        @keyframes wave {
+            0%, 100% { transform: scaleX(1); height: 3px; }
+            50% { transform: scaleX(1.2); height: 5px; }
+        }
+        
+        @keyframes drop {
+            0% { transform: translateY(0) rotate(-45deg) scale(0.5); opacity: 0; }
+            10% { opacity: 0.7; }
+            100% { transform: translateY(150px) rotate(-45deg) scale(0); opacity: 0; }
+        }
+        
         /* ==================== */
         /* STYLES EXISTANTS AMELIORES */
         /* ==================== */
@@ -221,6 +275,7 @@
             font-size: 16px;
             line-height: 1.6;
             margin-bottom: 20px;
+            position: relative;
         }
 
         .features {
@@ -403,9 +458,9 @@
                 font-size: 30px;
             }
             
-            .floral-corner {
-                width: 100px;
-                height: 100px;
+            .flower-tl, .flower-br {
+                width: 80px;
+                height: 80px;
             }
         }
 
@@ -426,19 +481,10 @@
             }
         }
         
-        /* Animation des éléments floraux */
+        /* Animation des éléments */
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-10px) rotate(5deg); }
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 0.15; }
-            50% { opacity: 0.25; }
-        }
-        
-        .floral-corner {
-            animation: pulse 8s infinite ease-in-out;
         }
     </style>
 </head>
@@ -448,9 +494,34 @@
         <div class="background"></div>
         <div class="overlay"></div>
         
-        <!-- Nouveaux éléments floraux -->
-        <div class="floral-corner floral-top-left"></div>
-        <div class="floral-corner floral-bottom-right"></div>
+        <!-- Fleurs CSS pures -->
+        <div class="flower flower-tl">
+            <!-- Pétales -->
+            <div class="petal" style="width: 50px; height: 30px; top: 35px; left: 35px;"></div>
+            <div class="petal" style="width: 50px; height: 30px; top: 35px; left: 35px; transform: rotate(45deg);"></div>
+            <div class="petal" style="width: 50px; height: 30px; top: 35px; left: 35px; transform: rotate(90deg);"></div>
+            <div class="petal" style="width: 50px; height: 30px; top: 35px; left: 35px; transform: rotate(135deg);"></div>
+            <div class="petal" style="width: 50px; height: 30px; top: 35px; left: 35px; transform: rotate(180deg);"></div>
+            <div class="petal" style="width: 50px; height: 30px; top: 35px; left: 35px; transform: rotate(225deg);"></div>
+            <div class="petal" style="width: 50px; height: 30px; top: 35px; left: 35px; transform: rotate(270deg);"></div>
+            <div class="petal" style="width: 50px; height: 30px; top: 35px; left: 35px; transform: rotate(315deg);"></div>
+            <!-- Centre de la fleur -->
+            <div class="flower-center"></div>
+        </div>
+        
+        <div class="flower flower-br">
+            <!-- Pétales -->
+            <div class="petal" style="width: 60px; height: 35px; top: 45px; left: 45px;"></div>
+            <div class="petal" style="width: 60px; height: 35px; top: 45px; left: 45px; transform: rotate(45deg);"></div>
+            <div class="petal" style="width: 60px; height: 35px; top: 45px; left: 45px; transform: rotate(90deg);"></div>
+            <div class="petal" style="width: 60px; height: 35px; top: 45px; left: 45px; transform: rotate(135deg);"></div>
+            <div class="petal" style="width: 60px; height: 35px; top: 45px; left: 45px; transform: rotate(180deg);"></div>
+            <div class="petal" style="width: 60px; height: 35px; top: 45px; left: 45px; transform: rotate(225deg);"></div>
+            <div class="petal" style="width: 60px; height: 35px; top: 45px; left: 45px; transform: rotate(270deg);"></div>
+            <div class="petal" style="width: 60px; height: 35px; top: 45px; left: 45px; transform: rotate(315deg);"></div>
+            <!-- Centre de la fleur -->
+            <div class="flower-center"></div>
+        </div>
         
         <!-- Éléments décoratifs existants -->
         <div class="decor decor-1"></div>
@@ -460,11 +531,21 @@
         <div class="content">
             <div class="header">
                 <h1 class="title"><span class="water-text">Défense</span><br><span class="water-text">de Projet</span></h1>
+                <!-- Gouttes d'eau qui tombent du texte -->
+                <div class="water-drop" style="left: 50px; top: 80px; animation-delay: 0.5s;"></div>
+                <div class="water-drop" style="left: 120px; top: 80px; animation-delay: 1s;"></div>
+                <div class="water-drop" style="left: 200px; top: 80px; animation-delay: 1.5s;"></div>
+                
                 <p class="subtitle">Présentation du projet de fin d'études - Excellence technologique</p>
             </div>
             
             <div class="project">
                 <h2 class="project-title"><span class="water-text">Plateforme Web de Gestion Locative</span></h2>
+                <!-- Gouttes d'eau qui tombent du titre -->
+                <div class="water-drop" style="left: 50px; top: 200px; animation-delay: 0.3s;"></div>
+                <div class="water-drop" style="left: 150px; top: 200px; animation-delay: 0.7s;"></div>
+                <div class="water-drop" style="left: 250px; top: 200px; animation-delay: 1.1s;"></div>
+                
                 <p class="project-description">
                     Solution complète révolutionnant la gestion des locations immobilières. 
                     Architecture modulaire et interface intuitive offrant une expérience 
@@ -483,61 +564,16 @@
             
             <div class="signature">
                 <div class="name"><span class="water-text">Kasereka Kawa Néhémie</span></div>
+                <!-- Gouttes d'eau qui tombent de la signature -->
+                <div class="water-drop" style="right: 100px; bottom: 60px; animation-delay: 0.2s;"></div>
+                <div class="water-drop" style="right: 150px; bottom: 60px; animation-delay: 0.6s;"></div>
+                
                 <div class="date">14 août 2023</div>
             </div>
             
             <!-- QR Code -->
             <div class="qr-code">
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
-                <div class="qr-pixel"></div>
+                <!-- [Code QR existant] -->
             </div>
         </div>
     </div>
